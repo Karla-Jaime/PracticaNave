@@ -40,7 +40,7 @@ void actualizar() {
 		//posYTriangulo += velTriangulo * tiempoDiferencial;
 
 		componenteX = (cos((angulo + 90) * 3.14159 / 180.0)) * (velTriangulo * tiempoDiferencial);
-		componenteY = sin((angulo + 90) * 3.14159 / 180.0) * (velTriangulo * tiempoDiferencial);
+		componenteY = (sin((angulo + 90) * 3.14159 / 180.0)) * (velTriangulo * tiempoDiferencial);
 
 		posXTriangulo += componenteX;
 		posYTriangulo += componenteY;
