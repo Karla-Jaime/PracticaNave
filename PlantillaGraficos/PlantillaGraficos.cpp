@@ -16,13 +16,12 @@ GLFWwindow* window;
 
 float posXTriangulo = 0.0f, posYTriangulo = 0.0f;
 double tiempoActual, tiempoAnterior;
+
 double velTriangulo = 0.5;
-
 float angulo = 0.0f;
-float mov = 0.0f;
-
 float componenteX;
 float componenteY;
+float velAngular = 90.0f;
 
 void actualizar() {
 	
@@ -33,14 +32,14 @@ void actualizar() {
 	int estadoDerecha = glfwGetKey(window, GLFW_KEY_RIGHT);
 	if (estadoDerecha == GLFW_PRESS) {
 		
-		angulo -= 90.00f * tiempoDiferencial;		
+		angulo -= velAngular * tiempoDiferencial;		
 	}
 	int estadoArriba = glfwGetKey(window, GLFW_KEY_UP);
 	if (estadoArriba == GLFW_PRESS) {
 		//posYTriangulo += velTriangulo * tiempoDiferencial;
 
-		componenteX = (cos((angulo + 90) * 3.14159 / 180.0)) * (velTriangulo * tiempoDiferencial);
-		componenteY = (sin((angulo + 90) * 3.14159 / 180.0)) * (velTriangulo * tiempoDiferencial);
+		componenteX = (cos((angulo + 90.0) * 3.141592 / 180.0)) * (velTriangulo * tiempoDiferencial);
+		componenteY = (sin((angulo + 90.0) * 3.141592 / 180.0)) * (velTriangulo * tiempoDiferencial);
 
 		posXTriangulo += componenteX;
 		posYTriangulo += componenteY;
@@ -65,12 +64,12 @@ void dibujarTriangulo() {
 
 	glTranslatef(posXTriangulo,posYTriangulo,0.0f);	
 	glRotatef(angulo, 0.0f, 0.0f, 1.0);
-	glScalef(0.5f, 0.5f, 0.0f);
+	glScalef(0.3f, 0.3f, 0.0f);
 
 	glBegin(GL_TRIANGLES);
-    glColor3f(0.2f,0.6f,0.1f);
+    glColor3f(1.0f,1.0f,1.0f);
 
-	glVertex3f(0.0f,0.15f,0.0f);
+	glVertex3f(0.0f,0.25f,0.0f);
 	glVertex3f(-0.15f, -0.15f, 0.0f); 
 	glVertex3f(0.15f, -0.15f, 0.0f);
 
@@ -78,9 +77,28 @@ void dibujarTriangulo() {
 	glPopMatrix();
 
 }
+void estrellas() {
+	glBegin(GL_POINTS);
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	glVertex3f(0.0f, 0.20f, 0.0f);
+	glVertex3f(-0.15f, -0.15f, 0.0f);
+	glVertex3f(0.15f, -0.3f, 0.0f);
+
+	glVertex3f(0.5f, 0.3f, 0.0f);
+	glVertex3f(-0.3f, -0.45f, 0.0f);
+	glVertex3f(0.9f, -0.7f, 0.0f);
+
+	glVertex3f(-0.7f, 0.20f, 0.0f);
+	glVertex3f(-0.25f, 0.75f, 0.0f);
+	glVertex3f(0.15f, -0.3f, 0.0f);
+	glEnd();
+}
+
 
 void dibujar() {
 	dibujarTriangulo();
+	estrellas();
 }
 
 int main()
@@ -132,7 +150,7 @@ int main()
 		//Establecer región de dibujo 
 		glViewport(0, 0, 600, 600);
 		//Establecemos el color de borrado
-		glClearColor(3, 0.8, 0.4, 1);
+		glClearColor(0, 0, 0, 1);
 		//Borrar
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		actualizar();
