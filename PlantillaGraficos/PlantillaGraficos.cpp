@@ -43,6 +43,20 @@ void actualizar() {
 
 		posXTriangulo += componenteX;
 		posYTriangulo += componenteY;
+
+		if (posXTriangulo <= -1.08) {
+			posXTriangulo = 1.00;
+		}
+		else if (posXTriangulo >= 1.08) {
+			posXTriangulo = -1.00;
+		}
+
+		if (posYTriangulo <= -1.08) {
+			posYTriangulo = 1.00;
+		}
+		else if (posYTriangulo >= 1.08) {
+			posYTriangulo = -1.00;
+		}
 	}
 
 	int estadoIzquierda = glfwGetKey(window, GLFW_KEY_LEFT);
